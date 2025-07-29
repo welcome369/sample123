@@ -37,7 +37,7 @@ jobs:
       - name: Run the tests with maven
         run: mvn test
   
-  file system scan:
+  file_system_scan(trivy):
     runs-on: Runner-1
     needs: test
 
