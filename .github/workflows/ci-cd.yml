@@ -21,7 +21,7 @@ jobs:
       - name: Run the compile with maven
         run: mvn compile
 
- test:
+  test:
     runs-on: Runner-1
     needs: compile
 
