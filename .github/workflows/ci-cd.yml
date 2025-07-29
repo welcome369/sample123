@@ -140,7 +140,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/myrepo:${{github.run_id}}
+          tags: welcome369/myrepo:${{github.run_id}}
 
     
   updatek8s:
@@ -155,7 +155,7 @@ jobs:
 
       - name: Update tag in kubernetes deployment manifest
         run: | 
-           sed -i "s|image: .*|image: ${{ secrets.DOCKER_USERNAME }}/myrepo:${{github.run_id}}|" deployment-service.yaml
+           sed -i "s|image: .*|image: welcome369/myrepo:${{github.run_id}}|" deployment-service.yaml
         
       - name: Commit and push changes
         run: |
