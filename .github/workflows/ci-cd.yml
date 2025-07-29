@@ -140,7 +140,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: welcome369/myrepo:${{github.run_id}}
+          tags: welcome369/myrepo:v1
 
     
   updatek8s:
