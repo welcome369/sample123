@@ -1,0 +1,22 @@
+name: CI-CD board-game project
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  # This job runs on the first runner
+  compile:
+    runs-on: Runner-1
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Run the compile with maven
+        run: mvn compile
