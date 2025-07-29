@@ -36,4 +36,30 @@ jobs:
           distribution: 'temurin'
       - name: Run the tests with maven
         run: mvn test
+
+  scan:
+    runs-on: Runner-1
+    needs: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Trivy installation
+        run: |
+           sudo apt-get install wget apt-transport-https gnupg lsb-release
+           wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+           echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+           sudo apt-get update -y
+           sudo apt-get install trivy -y   
+
+      - name: Trivy FS scan
+        run: trivy fs --format table -o fs-report.json . 
+
+      - name: gitleaks install
+        run: sudo apt install gitleaks -y 
+
+      - name: gitleaks code scan
+        run: gitleaks detect source . -r gitleaks-report.json -f json
+  
   
